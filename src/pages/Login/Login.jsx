@@ -18,6 +18,7 @@ import { toast } from "react-toastify";
 import * as authActions from "redux/auth/actions"
 
 const Login = () => {
+  console.log(process.env.REACT_APP_BASE_URL);
   const [formValues, setFormValues] = useState({ email: "", password: "" });
 
   const dispatch = useDispatch();
