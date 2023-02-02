@@ -11,11 +11,17 @@ import {
   MDBSpinner,
   MDBValidationItem,
 } from "mdb-react-ui-kit";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { toast } from "react-toastify";
+import * as authActions from "redux/auth/actions"
 
 const Login = () => {
   const [formValues, setFormValues] = useState({ email: "", password: "" });
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const onInputChange = (e) => {
     let { name, value } = e.target;
@@ -24,6 +30,10 @@ const Login = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    
+    if(formValues.email && formValues.password){
+      dispatch(authActions.login(formValues,navigate,toast))
+    }
   };
 
   return (
