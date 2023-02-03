@@ -12,13 +12,13 @@ import {
   MDBValidationItem,
 } from "mdb-react-ui-kit";
 import { Link, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import * as authActions from "redux/auth/actions"
 
 const Login = () => {
-  console.log(process.env.REACT_APP_BASE_URL);
+ 
   const [formValues, setFormValues] = useState({ email: "", password: "" });
 
   const dispatch = useDispatch();
@@ -36,6 +36,10 @@ const Login = () => {
       dispatch(authActions.login(formValues,navigate,toast))
     }
   };
+
+  useEffect(() => {
+    console.log(process.env.REACT_APP_BASE_URL);
+  },[])
 
   return (
     <div className={`${styles.Login}`}>
