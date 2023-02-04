@@ -33,13 +33,9 @@ const Login = () => {
     e.preventDefault();
     
     if(formValues.email && formValues.password){
-      dispatch(authActions.login(formValues,navigate,toast))
+      dispatch(authActions.login({formValues,navigate,toast}))
     }
   };
-
-  useEffect(() => {
-    console.log(process.env.REACT_APP_BASE_URL);
-  },[])
 
   return (
     <div className={`${styles.Login}`}>
