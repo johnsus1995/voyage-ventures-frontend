@@ -68,7 +68,6 @@ const Login = () => {
                 />
               </div>
             </MDBValidationItem>
-            <div className="col-md-12"></div>
             <div className="col-12">
               {/* <MDBBtn style={{width:"100%"}} className="mt-2"> */}
               <MDBBtn className="login-btn mt-2">
