@@ -12,18 +12,18 @@ import {
   MDBValidationItem,
 } from "mdb-react-ui-kit";
 import { Link, useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
-import * as authActions from "redux/auth/actions"
+import * as authActions from "redux/auth/actions";
 
 const Login = () => {
- 
   const [formValues, setFormValues] = useState({ email: "", password: "" });
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
+  const {loading,error} = useSelector(state=>({...state.auth}))
+  
   const onInputChange = (e) => {
     let { name, value } = e.target;
     setFormValues({ ...formValues, [name]: value });
@@ -31,9 +31,8 @@ const Login = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    
-    if(formValues.email && formValues.password){
-      dispatch(authActions.login({formValues,navigate,toast}))
+    if (formValues.email && formValues.password) {
+      dispatch(authActions.login({ formValues, navigate, toast })).unwrap();
     }
   };
 
@@ -72,13 +71,23 @@ const Login = () => {
             <div className="col-md-12"></div>
             <div className="col-12">
               {/* <MDBBtn style={{width:"100%"}} className="mt-2"> */}
-              <MDBBtn className="login-btn mt-2">Login</MDBBtn>
+              <MDBBtn className="login-btn mt-2">
+                {loading && (
+                  <MDBSpinner
+                    size="sm"
+                    role="status"
+                    tag="span"
+                    className="me-2"
+                  />
+                )}
+                Login
+              </MDBBtn>
             </div>
           </MDBValidation>
         </MDBCardBody>
         <MDBCardFooter>
           <Link to="/register">
-            <p>Dont have an account? Signup</p>
+            <p>Don't have an account? Sign-up here.</p>
           </Link>
         </MDBCardFooter>
       </MDBCard>
