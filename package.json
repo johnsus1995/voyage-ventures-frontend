@@ -9,6 +9,8 @@
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.2.6",
+    "cross-env": "^7.0.3",
+    "dotenv": "^16.0.3",
     "mdb-react-ui-kit": "^5.1.0",
     "moment": "^2.29.4",
     "plop": "^3.1.1",
@@ -24,7 +26,7 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "PORT=4000 react-scripts start",
+    "start": "cross-env react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
