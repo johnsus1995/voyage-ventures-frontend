@@ -5,11 +5,13 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import Navbar from "components/Navbar";
 
 function App() {
   return (
     <BrowserRouter>
       <div className="App">
+        <Navbar/>
         <ToastContainer
           position="top-right"
           autoClose={2000}
