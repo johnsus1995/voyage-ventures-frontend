@@ -37,8 +37,10 @@ const Register = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (formValues.email && formValues.password) {
-      // dispatch(authActions.register({ formValues, navigate, toast })).unwrap();
+    if(formValues.password === formValues.confirm_password){
+      dispatch(authActions.register({ formValues, navigate, toast })).unwrap();
+    }else{
+      toast.error("Passwords do not match!")
     }
   };
 
