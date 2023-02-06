@@ -15,8 +15,7 @@ const authSlice = createSlice({
     [actions.login.fulfilled]: (state, action) => {
       state.loading = false;
       state.user = action.payload;
-      debugger
-      localStorage.setItem("profile", JSON.stringify(action.payload));
+      localStorage.setItem("profile", JSON.stringify(action.payload.token));
     },
     [actions.login.rejected]: (state, action) => {
       state.loading = false;
