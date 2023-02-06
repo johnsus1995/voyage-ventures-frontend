@@ -1,4 +1,12 @@
 .Register {
   :global {
+    margin: auto;
+    padding: 15px;
+    max-width: 450px;
+    align-content: center;
+    margin-top: 120px;
+    .login-btn{
+      width: 100%;
+    }
   }
 }
