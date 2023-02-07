@@ -8,14 +8,10 @@ export const login = createAsyncThunk("auth/login", async (data) => {
     email: formValues.email,
     password: formValues.password,
   });
-
-  if (res.status === 200) {
-    navigate("/");
-    return res?.data;
-  } else {
-    console.log(res);
+    console.log(res)
+    return res
     // toast.error(error.response.data.message)
-  }
+  
 });
 
 export const register = createAsyncThunk("auth/register", async (data) => {
