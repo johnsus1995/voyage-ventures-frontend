@@ -29,11 +29,11 @@ const Login = () => {
     setFormValues({ ...formValues, [name]: value });
   };
 
-  const handleSubmit = async(e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (formValues.email && formValues.password) {
-      const res = await dispatch(authActions.login({data:formValues})).unwrap;
-      
+      const res = await dispatch(authActions.login({ data: formValues }));
+      console.log(res);
     }
   };
 

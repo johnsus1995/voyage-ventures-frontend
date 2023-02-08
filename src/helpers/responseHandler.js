@@ -10,9 +10,11 @@ export function apiErrorHandler(err) {
       case 503:
         window.location.href = "/maintenance";
         return;
+      case 400:
+        return err.response;
       case 404:
-          return err.response;
-        // window.location.href = "/404";
+        return err.response;
+      // window.location.href = "/404";
       case 401:
         localStorage.clear();
         setTimeout(() => {
@@ -22,12 +24,12 @@ export function apiErrorHandler(err) {
       default:
         break;
     }
-    
+
     return err.response.data;
   }
   return new Error("Unexpected Error Occurred!");
 }
 
 export function apiSuccessHandler(res) {
-  return res.data;
+  return res;
 }
