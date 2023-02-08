@@ -24,7 +24,7 @@ const Navbar = (props) => {
             href="/"
             style={{ color: "#606080", fontWeight: "600", fontSize: "22px" }}
           >
-            AppName
+            World
           </MDBNavbarBrand>
         </MDBContainer>
       </MDBNavbar>

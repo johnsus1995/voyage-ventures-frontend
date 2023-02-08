@@ -1,12 +1,35 @@
 import axios from "axios";
+import { apiErrorHandler, apiSuccessHandler } from "helpers/responseHandler";
 import Qs from "qs";
 
 const customAxios = axios.create({
-    baseURL:process.env.REACT_APP_BASE_URL,
-    headers:{'Content-Type':'application/json'},
-    paramsSerializer: {
-        indexes:false
-    }
-})
+  baseURL: process.env.REACT_APP_BASE_URL,
+  paramsSerializer: {
+    serialize: (params) => Qs.stringify(params, { arrayFormat: "brackets" }),
+  },
+});
 
-export default customAxios
+customAxios.interceptors.request.use(
+  function (config) {
+    const token = localStorage.getItem("u_tok");
+
+    config.headers = {
+      "Content-Type": "application/json",
+      Authorization: token ? `Bearer ${token}` : "",
+      ...config.headers,
+    };
+
+    // if (config.query) {
+    //   config.url = generatePath(config.url, config.query);
+    // }
+
+    return config;
+  },
+  function (error) {
+    return Promise.reject(error);
+  }
+);
+
+customAxios.interceptors.response.use(apiSuccessHandler, apiErrorHandler);
+
+export default customAxios;

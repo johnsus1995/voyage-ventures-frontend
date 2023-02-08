@@ -22,17 +22,18 @@ const Login = () => {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const {loading,error} = useSelector(state=>({...state.auth}))
-  
+  const { loading, error } = useSelector((state) => ({ ...state.auth }));
+
   const onInputChange = (e) => {
     let { name, value } = e.target;
     setFormValues({ ...formValues, [name]: value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
     if (formValues.email && formValues.password) {
-      dispatch(authActions.login({ formValues, navigate, toast })).unwrap();
+      const res = await dispatch(authActions.login({data:formValues})).unwrap;
+      
     }
   };
 

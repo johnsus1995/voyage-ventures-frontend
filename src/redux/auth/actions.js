@@ -1,17 +1,12 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import * as authApi from "../../api/auth";
 
-export const login = createAsyncThunk("auth/login", async (data) => {
-  const { formValues, navigate, toast } = data;
+export const login = createAsyncThunk("auth/login", async (config) => {
+  // const { formValues, navigate, toast } = data;
 
-  const res = await authApi.login({
-    email: formValues.email,
-    password: formValues.password,
-  });
-    console.log(res)
-    return res
-    // toast.error(error.response.data.message)
-  
+    const res = await authApi.login(config);
+    return res.data;
+
 });
 
 export const register = createAsyncThunk("auth/register", async (data) => {
@@ -29,6 +24,5 @@ export const register = createAsyncThunk("auth/register", async (data) => {
     return res?.data;
   } else {
     console.log(res);
-    // toast.error(error.response.data.message);
   }
 });

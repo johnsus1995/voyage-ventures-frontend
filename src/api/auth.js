@@ -1,11 +1,11 @@
 import customAxios from "../utils/api";
 
-export const login = (data, options) => {
+export const login = (config={}) => {
+  // const {} = config
   return customAxios({
     url: "/users/signin",
     method: "POST",
-    data,
-    ...options,
+    ...config
   });
 };
 

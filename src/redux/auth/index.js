@@ -15,7 +15,7 @@ const authSlice = createSlice({
     [actions.login.fulfilled]: (state, action) => {
       state.loading = false;
       state.user = action.payload;
-      localStorage.setItem("profile", JSON.stringify(action.payload.token));
+      // localStorage.setItem("user_token", JSON.stringify(action.payload.token));
     },
     [actions.login.rejected]: (state, action) => {
       state.loading = false;
@@ -30,7 +30,7 @@ const authSlice = createSlice({
     },
     [actions.register.rejected]: (state, action) => {
       state.loading = false;
-      state.error = action.payload.message
+      state.error = action?.payload?.message
     },
   },
 });
