@@ -1,10 +1,16 @@
 import PropTypes from "prop-types";
 import styles from "./AddOrEditTour.module.scss";
-import {} from "mdb-react-ui-kit"
+import {
+  MDBCard,
+  MDBCardBody,
+  MDBValidation,
+  MDBBtn,
+  MDBSpinner,
+} from "mdb-react-ui-kit";
 
 const AddOrEditTour = () => {
   return (
-    <div className={`${styles.AddOrEditTour}`} style={{marginTop:"100px"}}>
+    <div className={`${styles.AddOrEditTour}`} style={{ marginTop: "100px" }}>
       Add edit tour
     </div>
   );
