@@ -26,3 +26,4 @@ export const register = createAsyncThunk("auth/register", async (data) => {
     console.log(res);
   }
 });
+

@@ -16,15 +16,24 @@ import {
   // MDBDropdown,
 } from "mdb-react-ui-kit";
 import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "redux/auth";
 
 const Navbar = (props) => {
   const { className } = props;
+
+  const dispatch = useDispatch();
   const [show, setShow] = useState(false);
 
-  const { user } = useSelector((state) => state.auth);
+  const { user } = useSelector((state) => ({ ...state.authSlice }));
 
   console.log(user);
+
+
+  const handleLogout = () => {
+   dispatch(logout()) 
+  }
+
   return (
     <div className={`${styles.Navbar} ${className}`}>
       <MDBNavbar fixed="top" expand="lg" style={{ backgroundColor: "#f0e6ea" }}>
@@ -48,7 +57,7 @@ const Navbar = (props) => {
                   <p className="nav-link">Home</p>
                 </MDBNavbarLink>
               </MDBNavbarItem>
-              {!!user?.data?._id && (
+              {user?.data?._id && (
                 <>
                   <MDBNavbarItem>
                     <MDBNavbarLink href="/add-tour">
@@ -65,7 +74,7 @@ const Navbar = (props) => {
               {user?.data?._id ? (
                 <MDBNavbarItem>
                   <MDBNavbarLink href="/">
-                    <p className="nav-link">Logout</p>
+                    <p className="nav-link" onClick={handleLogout}>Logout</p>
                   </MDBNavbarLink>
                 </MDBNavbarItem>
               ) : (
