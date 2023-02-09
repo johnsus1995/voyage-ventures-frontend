@@ -32,7 +32,7 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const res = await dispatch(authActions.login({ data: formValues }));
-    console.log(res);
+    // console.log(res);
     if (res.payload.success) {
       navigate("/");
     }else{
