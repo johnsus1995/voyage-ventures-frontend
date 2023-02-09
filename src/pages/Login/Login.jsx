@@ -12,7 +12,7 @@ import {
   MDBValidationItem,
 } from "mdb-react-ui-kit";
 import { Link, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import {  useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import * as authActions from "redux/auth/actions";
@@ -22,7 +22,7 @@ const Login = () => {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { loading, error } = useSelector((state) => ({ ...state.auth }));
+  const { loading, user, error } = useSelector((state) => ({ ...state.auth }));
 
   const onInputChange = (e) => {
     let { name, value } = e.target;
@@ -31,9 +31,12 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (formValues.email && formValues.password) {
-      const res = await dispatch(authActions.login({ data: formValues }));
-      console.log(res);
+    const res = await dispatch(authActions.login({ data: formValues }));
+    console.log(res);
+    if (res.payload.success) {
+      navigate("/");
+    }else{
+      toast.error(res.payload.message)
     }
   };
 
