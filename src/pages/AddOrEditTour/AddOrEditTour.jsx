@@ -6,24 +6,115 @@ import {
   MDBValidation,
   MDBBtn,
   MDBSpinner,
+  MDBInput,
 } from "mdb-react-ui-kit";
 import { Chip } from "@mui/material";
 import FileBase from "react-file-base64";
 import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { useState } from "react";
 
 const AddOrEditTour = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [formValues, setFormValues] = useState({});
+  const { id } = useParams();
+  const [formValues, setFormValues] = useState({
+    title: "",
+    desc: "",
+    tags: "",
+  });
+
+  const onInputChange = () => {
+    //
+  };
+
+  const onChipDelete = () => {
+    //
+  };
+
+  const handleSubmit = () => {
+    //
+  }
+
+  const handleClear = () => {
+    //
+  }
+
   return (
     <div
       className={`${styles.AddOrEditTour}`}
-      style={{ marginTop: "100px" }}
+      // style={{ marginTop: "100px" }}
     >
-      .
+       <MDBCard alignment="center">
+        <h5>{id ? "Update Tour" : "Add Tour"}</h5>
+        <MDBCardBody>
+          <MDBValidation onSubmit={handleSubmit} className="row g-3" noValidate>
+            <div className="col-md-12">
+              <MDBInput
+                placeholder="Enter Title"
+                type="text"
+                value={formValues.title || ""}
+                name="title"
+                onChange={onInputChange}
+                className="form-control"
+                required
+                invalid
+                validation="Please provide title"
+              />
+            </div>
+            <div className="col-md-12">
+              <MDBInput
+                placeholder="Enter Description"
+                type="text"
+                value={formValues.desc}
+                name="description"
+                onChange={onInputChange}
+                className="form-control"
+                required
+                invalid
+                textarea
+                rows={4}
+                validation="Please provide description"
+              />
+            </div>
+            {/* <div className="col-md-12">
+              <ChipInput
+                name="tags"
+                variant="outlined"
+                placeholder="Enter Tag"
+                fullWidth
+                value={tags}
+                onAdd={(tag) => handleAddTag(tag)}
+                onDelete={(tag) => handleDeleteTag(tag)}
+              />
+              {tagErrMsg && <div className="tagErrMsg">{tagErrMsg}</div>}
+            </div> */}
+            <div className="d-flex justify-content-start">
+              <FileBase
+                type="file"
+                multiple={false}
+                onDone={({ base64 }) =>
+                  setFormValues({ ...formValues, imageFile: base64 })
+                }
+              />
+            </div>
+            <div className="col-12">
+              <MDBBtn style={{ width: "100%" }}>
+                {id ? "Update" : "Submit"}
+              </MDBBtn>
+              <MDBBtn
+                style={{ width: "100%" }}
+                className="mt-2"
+                color="danger"
+                onClick={handleClear}
+              >
+                Clear
+              </MDBBtn>
+            </div>
+          </MDBValidation>
+        </MDBCardBody>
+      </MDBCard>
     </div>
   );
 };
@@ -37,3 +128,5 @@ AddOrEditTour.propTypes = {
 };
 
 export default AddOrEditTour;
+
+//2:28
