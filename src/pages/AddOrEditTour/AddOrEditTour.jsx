@@ -14,6 +14,7 @@ import { toast } from "react-toastify";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { useState } from "react";
+import ChipInput from "components/utils/ChipInput";
 
 const AddOrEditTour = () => {
   const navigate = useNavigate();
@@ -44,7 +45,6 @@ const AddOrEditTour = () => {
   return (
     <div
       className={`${styles.AddOrEditTour}`}
-      // style={{ marginTop: "100px" }}
     >
        <MDBCard alignment="center">
         <h5>{id ? "Update Tour" : "Add Tour"}</h5>
@@ -78,18 +78,11 @@ const AddOrEditTour = () => {
                 validation="Please provide description"
               />
             </div>
-            {/* <div className="col-md-12">
-              <ChipInput
-                name="tags"
-                variant="outlined"
-                placeholder="Enter Tag"
-                fullWidth
-                value={tags}
-                onAdd={(tag) => handleAddTag(tag)}
-                onDelete={(tag) => handleDeleteTag(tag)}
-              />
-              {tagErrMsg && <div className="tagErrMsg">{tagErrMsg}</div>}
-            </div> */}
+            {/* Chip input */}
+            <div className="col-md-12">
+              <ChipInput/>
+            </div>
+
             <div className="d-flex justify-content-start">
               <FileBase
                 type="file"
