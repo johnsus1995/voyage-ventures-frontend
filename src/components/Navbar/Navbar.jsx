@@ -27,16 +27,14 @@ const Navbar = (props) => {
 
   const { user } = useSelector((state) => ({ ...state.authSlice }));
 
-  console.log(user);
-
-
   const handleLogout = () => {
    dispatch(logout()) 
   }
 
   return (
     <div className={`${styles.Navbar} ${className}`}>
-      <MDBNavbar fixed="top" expand="lg" style={{ backgroundColor: "#f0e6ea" }}>
+
+      <MDBNavbar  expand="lg" style={{ backgroundColor: "#f0e6ea" }}>
         <MDBContainer>
           <MDBNavbarBrand href="/" className="logo">
             World
