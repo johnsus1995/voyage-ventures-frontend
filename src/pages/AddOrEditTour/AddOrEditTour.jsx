@@ -3,7 +3,7 @@ import styles from "./AddOrEditTour.module.scss";
 import {
   MDBCard,
   MDBCardBody,
-  MDBValidation,
+  // MDBValidation,
   MDBBtn,
   MDBSpinner,
   MDBInput,
@@ -13,14 +13,14 @@ import FileBase from "react-file-base64";
 import { toast } from "react-toastify";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ChipInput from "components/utils/ChipInput";
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 
 const tourSchema = yup.object().shape({
-  title: yup.string().required(),
+  title: yup.string().required("Title is required!"),
   description: yup.string().required(),
   tags: yup.array(),
 });
@@ -46,6 +46,10 @@ const AddOrEditTour = () => {
     console.log(data);
   };
 
+  useEffect(() => {
+    console.log(errors);
+  }, [errors]);
+
   return (
     <div className={`${styles.AddOrEditTour}`}>
       <MDBCard alignment="center">
@@ -53,7 +57,7 @@ const AddOrEditTour = () => {
         <MDBCardBody>
           {/* <MDBValidation  className="row g-3"> */}
           <form onSubmit={handleSubmit(onSubmit)}>
-            <div className="col-md-12">
+            <div className="col-md-12 input-element">
               <Controller
                 name="title"
                 control={control}
@@ -68,9 +72,12 @@ const AddOrEditTour = () => {
                   />
                 )}
               />
+              <p className="error-message">
+                {errors.title ? <span>{errors.title.message}</span> : ""}
+              </p>
             </div>
 
-            <div className="col-md-12">
+            <div className="col-md-12 input-element">
               <Controller
                 name="description"
                 control={control}
@@ -88,7 +95,7 @@ const AddOrEditTour = () => {
             </div>
 
             {/* Chip input */}
-            <div className="col-md-12 chip-input">
+            <div className="col-md-12 chip-input input-element">
               <Controller
                 name="description"
                 control={control}
@@ -97,7 +104,7 @@ const AddOrEditTour = () => {
               />
             </div>
 
-            <div className="d-flex justify-content-start">
+            <div className="d-flex justify-content-start input-element">
               <Controller
                 name="description"
                 control={control}

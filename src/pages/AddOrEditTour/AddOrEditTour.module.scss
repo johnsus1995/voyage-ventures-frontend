@@ -5,10 +5,19 @@
     max-width: 450px;
     align-content: center;
     margin-top: 120px;
+
+    .input-element{
+      // padding-bottom: 20px;
+    }
+    
+    .error-message{
+      min-height: 20px;
+      text-align: start;
+      // margin-bottom: 0;
+    }
     
     .chip-input .css-1hfcwwv-MuiStack-root{
       width: 100%;
-      
     }
   }
   
