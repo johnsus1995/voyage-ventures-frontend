@@ -16,6 +16,8 @@ import { useDispatch } from "react-redux";
 import { useState } from "react";
 import ChipInput from "components/utils/ChipInput";
 
+
+
 const AddOrEditTour = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -79,7 +81,7 @@ const AddOrEditTour = () => {
               />
             </div>
             {/* Chip input */}
-            <div className="col-md-12">
+            <div className="col-md-12 chip-input">
               <ChipInput/>
             </div>
 
