@@ -7,91 +7,109 @@ import {
   MDBBtn,
   MDBSpinner,
   MDBInput,
+  MDBTextArea,
 } from "mdb-react-ui-kit";
-import { Chip } from "@mui/material";
 import FileBase from "react-file-base64";
 import { toast } from "react-toastify";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { useState } from "react";
 import ChipInput from "components/utils/ChipInput";
+import { useForm, Controller } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
 
-
+const tourSchema = yup.object().shape({
+  title: yup.string().required(),
+  description: yup.string().required(),
+  tags: yup.array(),
+});
 
 const AddOrEditTour = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { id } = useParams();
-  const [formValues, setFormValues] = useState({
-    title: "",
-    desc: "",
-    tags: "",
+
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(tourSchema),
   });
-
-  const onInputChange = () => {
-    //
-  };
-
-  const onChipDelete = () => {
-    //
-  };
-
-  const handleSubmit = () => {
-    //
-  }
 
   const handleClear = () => {
     //
-  }
+  };
+
+  const onSubmit = (data) => {
+    console.log(data);
+  };
 
   return (
-    <div
-      className={`${styles.AddOrEditTour}`}
-    >
-       <MDBCard alignment="center">
+    <div className={`${styles.AddOrEditTour}`}>
+      <MDBCard alignment="center">
         <h5>{id ? "Update Tour" : "Add Tour"}</h5>
         <MDBCardBody>
-          <MDBValidation onSubmit={handleSubmit} className="row g-3" noValidate>
+          {/* <MDBValidation  className="row g-3"> */}
+          <form onSubmit={handleSubmit(onSubmit)}>
             <div className="col-md-12">
-              <MDBInput
-                placeholder="Enter Title"
-                type="text"
-                value={formValues.title || ""}
+              <Controller
                 name="title"
-                onChange={onInputChange}
-                className="form-control"
-                required
-                invalid
-                validation="Please provide title"
+                control={control}
+                defaultValue=""
+                render={({ field }) => (
+                  <MDBInput
+                    {...field}
+                    size="lg"
+                    label="Title"
+                    type="text"
+                    className="form-control"
+                  />
+                )}
               />
             </div>
+
             <div className="col-md-12">
-              <MDBInput
-                placeholder="Enter Description"
-                type="text"
-                value={formValues.desc}
+              <Controller
                 name="description"
-                onChange={onInputChange}
-                className="form-control"
-                required
-                invalid
-                textarea
-                rows={4}
-                validation="Please provide description"
+                control={control}
+                defaultValue=""
+                render={({ field }) => (
+                  <MDBTextArea
+                    {...field}
+                    size="lg"
+                    label="Description"
+                    className="form-control"
+                    rows={4}
+                  />
+                )}
               />
             </div>
+
             {/* Chip input */}
             <div className="col-md-12 chip-input">
-              <ChipInput/>
+              <Controller
+                name="description"
+                control={control}
+                defaultValue=""
+                render={({ field }) => <ChipInput {...field} />}
+              />
             </div>
 
             <div className="d-flex justify-content-start">
-              <FileBase
-                type="file"
-                multiple={false}
-                onDone={({ base64 }) =>
-                  setFormValues({ ...formValues, imageFile: base64 })
-                }
+              <Controller
+                name="description"
+                control={control}
+                defaultValue=""
+                render={({ field }) => (
+                  <FileBase
+                    {...field}
+                    type="file"
+                    multiple={false}
+                    // onDone={}
+                  />
+                )}
               />
             </div>
             <div className="col-12">
@@ -107,7 +125,8 @@ const AddOrEditTour = () => {
                 Clear
               </MDBBtn>
             </div>
-          </MDBValidation>
+          </form>
+          {/* </MDBValidation> */}
         </MDBCardBody>
       </MDBCard>
     </div>
