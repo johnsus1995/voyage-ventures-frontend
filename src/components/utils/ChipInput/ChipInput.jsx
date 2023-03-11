@@ -6,14 +6,18 @@ import TextField from "@mui/material/TextField";
 import Stack from "@mui/material/Stack";
 
 const ChipInput = (props) => {
-  const { className } = props;
+  const { className,setChips } = props;
 
   const top100Films = [
-    { title: "tag1" },
-    { title: "tag2" },
+    { title: "one" },
+    { title: "two" },
+    { title: "three" },
+    { title: "four" },
+    { title: "five" },
   ];
 
   const onChangeChipInput = (value, getTagProps) => {
+    setChips(value)
     return value.map((option, index) => (
       <Chip variant="outlined" label={option} {...getTagProps({ index })} />
     ));
@@ -31,7 +35,7 @@ const ChipInput = (props) => {
           renderTags={onChangeChipInput}
           renderInput={(params) => (
             <TextField
-            {...params}
+              {...params}
               variant="filled"
               label="Tags"
               placeholder="Add tags..."

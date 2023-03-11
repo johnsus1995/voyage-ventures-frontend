@@ -9,7 +9,7 @@ import {
   MDBInput,
   MDBTextArea,
 } from "mdb-react-ui-kit";
-import FileBase from "react-file-base64";
+import FileBase64 from "react-file-base64";
 import { toast } from "react-toastify";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
@@ -21,8 +21,7 @@ import * as yup from "yup";
 
 const tourSchema = yup.object().shape({
   title: yup.string().required("Title is required!"),
-  description: yup.string().required(),
-  tags: yup.array(),
+  description: yup.string().required("Description is required"),
 });
 
 const AddOrEditTour = () => {
@@ -30,9 +29,13 @@ const AddOrEditTour = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
 
+  const [chips, setChips] = useState([]);
+  const [loading, setLoading] = useState(false);
+
   const {
     control,
     handleSubmit,
+    // watch,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(tourSchema),
@@ -46,16 +49,15 @@ const AddOrEditTour = () => {
     console.log(data);
   };
 
-  useEffect(() => {
-    console.log(errors);
-  }, [errors]);
+  const onFileUpload = (string) => {
+    console.log(string);
+  };
 
   return (
     <div className={`${styles.AddOrEditTour}`}>
       <MDBCard alignment="center">
         <h5>{id ? "Update Tour" : "Add Tour"}</h5>
         <MDBCardBody>
-          {/* <MDBValidation  className="row g-3"> */}
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className="col-md-12 input-element">
               <Controller
@@ -85,36 +87,44 @@ const AddOrEditTour = () => {
                 render={({ field }) => (
                   <MDBTextArea
                     {...field}
-                    size="lg"
                     label="Description"
                     className="form-control"
                     rows={4}
                   />
                 )}
               />
+              <p className="error-message">
+                {errors.description ? (
+                  <span>{errors.description.message}</span>
+                ) : (
+                  ""
+                )}
+              </p>
             </div>
 
             {/* Chip input */}
-            <div className="col-md-12 chip-input input-element">
+            <div className="col-md-12 chip-input">
               <Controller
-                name="description"
-                control={control}
-                defaultValue=""
-                render={({ field }) => <ChipInput {...field} />}
-              />
-            </div>
-
-            <div className="d-flex justify-content-start input-element">
-              <Controller
-                name="description"
+                name="tags"
                 control={control}
                 defaultValue=""
                 render={({ field }) => (
-                  <FileBase
+                  <ChipInput {...field} setChips={setChips} />
+                )}
+              />
+            </div>
+
+            <div className="d-flex justify-content-start file-upload">
+              <Controller
+                name="file"
+                control={control}
+                defaultValue=""
+                render={({ field }) => (
+                  <FileBase64
                     {...field}
                     type="file"
                     multiple={false}
-                    // onDone={}
+                    onDone={onFileUpload}
                   />
                 )}
               />
@@ -133,7 +143,6 @@ const AddOrEditTour = () => {
               </MDBBtn>
             </div>
           </form>
-          {/* </MDBValidation> */}
         </MDBCardBody>
       </MDBCard>
     </div>
