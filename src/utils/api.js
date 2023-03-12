@@ -11,7 +11,7 @@ const customAxios = axios.create({
 
 customAxios.interceptors.request.use(
   function (config) {
-    const token = localStorage.getItem("u_tok");
+    const token = localStorage.getItem("user_token");
 
     config.headers = {
       "Content-Type": "application/json",

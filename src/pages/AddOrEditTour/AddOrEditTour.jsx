@@ -31,10 +31,6 @@ const AddOrEditTour = () => {
   const { id } = useParams();
   const user = useSelector(state=>state.authSlice.user.data)
 
-  useEffect(() => {
-    console.log(user)
-  },[])
-
   const [chips, setChips] = useState([]);
   const [base64Image, setBase64Image] = useState("");
   // const [loading, setLoading] = useState(false);
