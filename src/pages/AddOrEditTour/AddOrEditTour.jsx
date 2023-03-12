@@ -18,11 +18,11 @@ import ChipInput from "components/utils/ChipInput";
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import * as tourActions from "redux/tour/actions"
+import * as tourActions from "redux/tour/actions";
 
 const tourSchema = yup.object().shape({
   title: yup.string().required("Title is required!"),
-  description: yup.string().required("Description is required"),
+  desc: yup.string().required("Description is required"),
 });
 
 const AddOrEditTour = () => {
@@ -31,6 +31,7 @@ const AddOrEditTour = () => {
   const { id } = useParams();
 
   const [chips, setChips] = useState([]);
+  const [base64Image, setBase64Image] = useState("");
   // const [loading, setLoading] = useState(false);
 
   const {
@@ -46,13 +47,19 @@ const AddOrEditTour = () => {
     //
   };
 
-  const onSubmit =async (data) => {
-    const res = await dispatch(tourActions.create(data))
+  const onSubmit = async (data) => {
+    const reqData = {
+      title: data.title,
+      desc: data.desc,
+      tags: chips,
+      image: base64Image.base64,
+    };
+    const res = await dispatch(tourActions.create(reqData))
     if(res) console.log(res)
   };
 
   const onFileUpload = (string) => {
-    console.log(string);
+    setBase64Image(string);
   };
 
   return (
@@ -83,7 +90,7 @@ const AddOrEditTour = () => {
 
             <div className="col-md-12 input-element">
               <Controller
-                name="description"
+                name="desc"
                 control={control}
                 defaultValue=""
                 render={({ field }) => (
@@ -97,7 +104,7 @@ const AddOrEditTour = () => {
               />
               <p className="error-message">
                 {errors.description ? (
-                  <span>{errors.description.message}</span>
+                  <span>{errors?.desc?.message}</span>
                 ) : (
                   ""
                 )}
