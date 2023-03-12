@@ -12,7 +12,7 @@ import {
 import FileBase64 from "react-file-base64";
 import { toast } from "react-toastify";
 import { useNavigate, useParams } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import ChipInput from "components/utils/ChipInput";
 import { useForm, Controller } from "react-hook-form";
@@ -21,14 +21,19 @@ import * as yup from "yup";
 import * as tourActions from "redux/tour/actions";
 
 const tourSchema = yup.object().shape({
-  title: yup.string().required("Title is required!"),
-  desc: yup.string().required("Description is required"),
+  title: yup.string().required("Title is required."),
+  desc: yup.string().required("Description is required."),
 });
 
 const AddOrEditTour = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { id } = useParams();
+  const user = useSelector(state=>state.authSlice.user.data)
+
+  useEffect(() => {
+    console.log(user)
+  },[])
 
   const [chips, setChips] = useState([]);
   const [base64Image, setBase64Image] = useState("");
@@ -53,6 +58,7 @@ const AddOrEditTour = () => {
       desc: data.desc,
       tags: chips,
       image: base64Image.base64,
+      user:user
     };
     const res = await dispatch(tourActions.create(reqData))
     if(res) console.log(res)
@@ -103,7 +109,7 @@ const AddOrEditTour = () => {
                 )}
               />
               <p className="error-message">
-                {errors.description ? (
+                {errors.desc ? (
                   <span>{errors?.desc?.message}</span>
                 ) : (
                   ""
