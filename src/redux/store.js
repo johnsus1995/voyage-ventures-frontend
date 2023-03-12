@@ -13,11 +13,13 @@ import {
 } from "redux-persist";
 
 import authSlice from "./auth";
+import tourSlice from "./tour"
 
 const rootReducer = combineReducers({
   // slice1,
   // slice2,
   authSlice,
+  tourSlice
 });
 
 const persistConfig = {

@@ -18,6 +18,7 @@ import ChipInput from "components/utils/ChipInput";
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import * as tourActions from "redux/tour/actions"
 
 const tourSchema = yup.object().shape({
   title: yup.string().required("Title is required!"),
@@ -30,7 +31,7 @@ const AddOrEditTour = () => {
   const { id } = useParams();
 
   const [chips, setChips] = useState([]);
-  const [loading, setLoading] = useState(false);
+  // const [loading, setLoading] = useState(false);
 
   const {
     control,
@@ -45,8 +46,9 @@ const AddOrEditTour = () => {
     //
   };
 
-  const onSubmit = (data) => {
-    console.log(data);
+  const onSubmit =async (data) => {
+    const res = await dispatch(tourActions.create(data))
+    if(res) console.log(res)
   };
 
   const onFileUpload = (string) => {
