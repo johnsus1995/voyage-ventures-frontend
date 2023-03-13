@@ -16,10 +16,10 @@ export function apiErrorHandler(err) {
         return err.response;
       // window.location.href = "/404";
       case 401:
-        localStorage.clear();
-        setTimeout(() => {
-          window.location.href = "/login";
-        }, 600);
+        // localStorage.clear();
+        // setTimeout(() => {
+        //   window.location.href = "/login";
+        // }, 600);
         break;
       default:
         break;
