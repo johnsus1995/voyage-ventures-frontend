@@ -38,6 +38,7 @@ const AddOrEditTour = () => {
   const {
     control,
     handleSubmit,
+    reset,
     // watch,
     formState: { errors },
   } = useForm({
@@ -45,7 +46,8 @@ const AddOrEditTour = () => {
   });
 
   const handleClear = () => {
-    //
+    reset({})
+    setChips([])
   };
 
   const onSubmit = async (data) => {
@@ -57,7 +59,10 @@ const AddOrEditTour = () => {
       user:user
     };
     const res = await dispatch(tourActions.create(reqData))
-    if(res) console.log(res)
+    if(res.payload.success){
+      toast.success(res.payload.message)
+      handleClear()
+    }
   };
 
   const onFileUpload = (string) => {
