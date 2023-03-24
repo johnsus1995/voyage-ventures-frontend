@@ -3,12 +3,18 @@ import { useEffect } from "react";
 import styles from "./Home.module.scss";
 import * as tourActions from "redux/tour/actions";
 import { useDispatch, useSelector } from "react-redux";
-import { allTours } from "redux/tour/selectors";
-import { MDBCol, MDBContainer, MDBRow, MDBTypography } from "mdb-react-ui-kit";
+import { allTours, isLoading } from "redux/tour/selectors";
+import {
+  MDBCol,
+  MDBContainer,
+  MDBRow,
+  MDBSpinner,
+} from "mdb-react-ui-kit";
 import TourCard from "components/utils/TourCard";
 
 const Home = () => {
   const dispatch = useDispatch();
+  const isAllToursLoading = useSelector((state) => isLoading(state));
   const tours = useSelector((state) => allTours(state));
 
   useEffect(() => {
@@ -23,19 +29,29 @@ const Home = () => {
         </MDBTypography> */}
         <MDBCol>
           <MDBContainer>
-            <MDBRow className="row-cols-1 row-cols-md-3 g-2">
-              {tours.length && tours?.map((tour, index) => (
-                <TourCard
-                  key={index}
-                  image={tour?.image || ""}
-                  desc={tour?.desc}
-                  title={tour?.title}
-                  tags={tour?.tags}
-                  id={tour?._id}
-                  name={tour?.user?.name}
-                />
-              ))}
-            </MDBRow>
+            {!isAllToursLoading ? (
+              <MDBRow className="row-cols-1 row-cols-md-3 g-2">
+                {tours.length &&
+                  tours?.map((tour, index) => (
+                    <TourCard
+                      key={index}
+                      image={tour?.image || ""}
+                      desc={tour?.desc}
+                      title={tour?.title}
+                      tags={tour?.tags}
+                      id={tour?._id}
+                      name={tour?.user?.name}
+                    />
+                  ))}
+              </MDBRow>
+            ) : (
+              <MDBSpinner
+                className="me-2"
+                style={{ width: "3rem", height: "3rem" }}
+              >
+                <span className="visually-hidden">Loading...</span>
+              </MDBSpinner>
+            )}
           </MDBContainer>
         </MDBCol>
       </MDBRow>

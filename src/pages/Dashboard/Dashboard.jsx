@@ -1,0 +1,117 @@
+import PropTypes from "prop-types";
+import styles from "./Dashboard.module.scss";
+import { useDispatch, useSelector } from "react-redux";
+import * as tourActions from "redux/tour/actions";
+import { useEffect } from "react";
+import { usersTours } from "redux/tour/selectors";
+import { user } from "redux/auth/selectors";
+import {
+  MDBCard,
+  MDBCardTitle,
+  MDBCardText,
+  MDBCardBody,
+  MDBCardImage,
+  MDBRow,
+  MDBCol,
+  MDBBtn,
+  MDBIcon,
+  MDBCardGroup,
+} from "mdb-react-ui-kit";
+import { Link } from "react-router-dom";
+
+const Dashboard = () => {
+  const dispatch = useDispatch();
+  const _usersTours = useSelector((state) => usersTours(state));
+  const _user = useSelector((state) => user(state));
+
+  const excerpt = (str) => {
+    if (str?.length > 40) {
+      str = str.substring(0, 40) + " ...";
+    }
+    return str;
+  };
+
+  const handleDelete = (id) => {
+
+    // dispatch(deleteTour({ id, toast }));
+    console.log(_user)
+  };
+
+  useEffect(() => {
+    dispatch(tourActions.fetchTourByUserId(_user.data._id));
+  }, []);
+
+  return (
+    <div className={`${styles.Dashboard}`}>
+      {_usersTours.length > 0 && (
+        <>
+          <h5 className="text-center">Dashboard: {_user?.data?.name}</h5>
+          <hr style={{ maxWidth: "570px" }} />
+        </>
+      )}
+      {_usersTours?.map((item) => (
+        <MDBCardGroup key={item._id}>
+          <MDBCard style={{ maxWidth: "600px" }} className="mt-2">
+            <MDBRow className="g-0">
+              <MDBCol md="4">
+                <MDBCardImage
+                  className="rounded"
+                  src={item.image}
+                  alt={item.title}
+                  fluid
+                />
+              </MDBCol>
+              <MDBCol md="8">
+                <MDBCardBody>
+                  <MDBCardTitle className="text-start">
+                    {item.title}
+                  </MDBCardTitle>
+                  <MDBCardText className="text-start">
+                    <small className="text-muted">
+                      {excerpt(item.desc)}
+                    </small>
+                  </MDBCardText>
+                  <div
+                    style={{
+                      marginLeft: "5px",
+                      float: "right",
+                      marginTop: "-60px",
+                    }}
+                  >
+                    <MDBBtn className="mt-1" tag="a" color="none">
+                      <MDBIcon
+                        fas
+                        icon="trash"
+                        style={{ color: "#dd4b39" }}
+                        size="lg"
+                        onClick={() => handleDelete(item._id)}
+                      />
+                    </MDBBtn>
+                    <Link to={`/editTour/${item._id}`}>
+                      <MDBIcon
+                        fas
+                        icon="edit"
+                        style={{ color: "#55acee", marginLeft: "10px" }}
+                        size="lg"
+                      />
+                    </Link>
+                  </div>
+                </MDBCardBody>
+              </MDBCol>
+            </MDBRow>
+          </MDBCard>
+        </MDBCardGroup>
+      ))}
+    </div>
+  );
+};
+
+Dashboard.defaultProps = {
+  className: "",
+};
+
+Dashboard.propTypes = {
+  className: PropTypes.string,
+};
+
+export default Dashboard;

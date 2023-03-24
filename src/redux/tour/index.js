@@ -8,7 +8,8 @@ const tourSlice = createSlice({
     tour: {},
     tours:[],
     error: {},
-    selectedTour:{}
+    selectedTour:{},
+    usersTours:[]
   },
   extraReducers: {
     // CREATE TOUR
@@ -42,6 +43,17 @@ const tourSlice = createSlice({
       state.selectedTour = action.payload.data;
     },
     [actions.fetchTourById.rejected]: (state, action) => {
+      state.loading = false;
+    },
+    // FETCH TOURS BY user's /:id
+    [actions.fetchTourByUserId.pending]: (state, action) => {
+      state.loading = true;
+    },
+    [actions.fetchTourByUserId.fulfilled]: (state, action) => {
+      state.loading = false;
+      state.usersTours = action.payload.data;
+    },
+    [actions.fetchTourByUserId.rejected]: (state, action) => {
       state.loading = false;
     },
   },

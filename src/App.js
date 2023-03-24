@@ -8,6 +8,7 @@ import Register from "./pages/Register";
 import AddOrEditTour from "pages/AddOrEditTour";
 import MainLayout from "layouts/MainLayout";
 import Tour from "pages/Tour";
+import Dashboard from "pages/Dashboard";
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
             <Route path="/add-tour" element={<AddOrEditTour />} />
             <Route path="/update/:id" element={<AddOrEditTour />} />
             <Route path="/tour/:id" element={<Tour />} />
+            <Route path="/dashboard" element={<Dashboard />} />
           </Route>
         </Routes>
       </div>

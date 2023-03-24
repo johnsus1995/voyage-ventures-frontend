@@ -15,3 +15,8 @@ export const fetchTourById = createAsyncThunk("tour/fetchTourById", async (confi
   const res = await tourApi.fetchTourById(config);
   return res.data;
 });
+
+export const fetchTourByUserId = createAsyncThunk("tour/fetchTourByUserId", async (config) => {
+  const res = await tourApi.fetchTourByUserId(config);
+  return res.data;
+});

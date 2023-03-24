@@ -25,3 +25,11 @@ export const fetchTourById = (id, options) => {
     ...options,
   });
 };
+
+export const fetchTourByUserId = (id, options) => {
+  return customAxios({
+    url: `/tours/user-tours/${id}`,
+    method: "GET",
+    ...options,
+  });
+};
