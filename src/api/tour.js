@@ -8,3 +8,12 @@ export const create = (data, options) => {
     ...options,
   });
 };
+
+export const fetchAllTours = (data, options) => {
+  return customAxios({
+    url: "/tours/all-tours",
+    method: "GET",
+    data,
+    ...options,
+  });
+};

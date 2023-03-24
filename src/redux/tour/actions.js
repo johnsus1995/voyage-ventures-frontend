@@ -5,3 +5,8 @@ export const create = createAsyncThunk("tour/create", async (config) => {
   const res = await tourApi.create(config);
   return res.data;
 });
+
+export const fetchAllTours = createAsyncThunk("tour/create", async (config) => {
+  const res = await tourApi.fetchAllTours(config);
+  return res.data;
+});

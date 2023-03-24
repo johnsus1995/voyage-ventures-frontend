@@ -46,8 +46,8 @@ const AddOrEditTour = () => {
   });
 
   const handleClear = () => {
-    reset({})
-    setChips([])
+    reset({});
+    setChips([]);
   };
 
   const onSubmit = async (data) => {
