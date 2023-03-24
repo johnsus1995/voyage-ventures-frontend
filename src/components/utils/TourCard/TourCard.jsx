@@ -6,7 +6,6 @@ import {
   MDBCardTitle,
   MDBCardText,
   MDBCardImage,
-  MDBCardGroup,
 } from "mdb-react-ui-kit";
 import { Link } from "react-router-dom";
 
@@ -32,7 +31,7 @@ const TourCard = (props) => {
         <div className="top-lef">{name}</div>
         <span className="text-start tag-card">
           {tags?.map((tag, index) => (
-            <p key={index}>{`#${tag}`} {" "}</p>
+            <p key={index}>{`#${tag}`}</p>
           ))}
         </span>
         <MDBCardBody>

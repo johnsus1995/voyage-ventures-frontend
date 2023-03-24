@@ -17,3 +17,11 @@ export const fetchAllTours = (data, options) => {
     ...options,
   });
 };
+
+export const fetchTourById = (id, options) => {
+  return customAxios({
+    url: `/tours/${id}`,
+    method: "GET",
+    ...options,
+  });
+};

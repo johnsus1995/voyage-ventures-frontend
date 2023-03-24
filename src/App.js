@@ -7,6 +7,7 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import AddOrEditTour from "pages/AddOrEditTour";
 import MainLayout from "layouts/MainLayout";
+import Tour from "pages/Tour";
 
 function App() {
   return (
@@ -31,7 +32,8 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/add-tour" element={<AddOrEditTour />} />
-            <Route path="/tour-tour/:id" element={<AddOrEditTour />} />
+            <Route path="/update/:id" element={<AddOrEditTour />} />
+            <Route path="/tour/:id" element={<Tour />} />
           </Route>
         </Routes>
       </div>

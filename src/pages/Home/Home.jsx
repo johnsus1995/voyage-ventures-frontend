@@ -24,18 +24,17 @@ const Home = () => {
         <MDBCol>
           <MDBContainer>
             <MDBRow className="row-cols-1 row-cols-md-3 g-2">
-              {tours &&
-                tours.map((tour, index) => (
-                  <TourCard
-                    key={index}
-                    image={tour?.image || ""}
-                    desc={tour?.desc}
-                    title={tour?.title}
-                    tags={tour?.tags}
-                    id={tour?._id}
-                    name={tour?.user?.name}
-                  />
-                ))}
+              {tours.length && tours?.map((tour, index) => (
+                <TourCard
+                  key={index}
+                  image={tour?.image || ""}
+                  desc={tour?.desc}
+                  title={tour?.title}
+                  tags={tour?.tags}
+                  id={tour?._id}
+                  name={tour?.user?.name}
+                />
+              ))}
             </MDBRow>
           </MDBContainer>
         </MDBCol>

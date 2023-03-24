@@ -56,7 +56,8 @@ const AddOrEditTour = () => {
       desc: data.desc,
       tags: chips,
       image: base64Image.base64,
-      user:user
+      user:user,
+      created_by: user._id
     };
     const res = await dispatch(tourActions.create(reqData))
     if(res.payload.success){
