@@ -1,1 +1,1 @@
-export const allTours  = (state) => state.tours
+export const allTours  = (state) => state.tourSlice.tours
