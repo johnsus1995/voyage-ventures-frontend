@@ -2,7 +2,7 @@
 
 .Navbar {
   :global {
-
+    padding-bottom: 50px;
     .logo{
       color: #606080;
       font-weight: 600;
@@ -13,6 +13,10 @@
       font-weight: 500;
       margin-top: 7px;
       font-size: 17px;
+    }
+    .navbar{
+      box-shadow: none;
+      background-color: #fff;
     }
   }
 }

@@ -34,7 +34,7 @@ const Navbar = (props) => {
   return (
     <div className={`${styles.Navbar} ${className}`}>
 
-      <MDBNavbar  expand="lg" style={{ backgroundColor: "#f0e6ea" }}>
+      <MDBNavbar fixed='top'  expand="lg">
         <MDBContainer>
           <MDBNavbarBrand href="/" className="logo">
             World
