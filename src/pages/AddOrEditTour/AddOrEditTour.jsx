@@ -4,8 +4,8 @@ import {
   MDBCard,
   MDBCardBody,
   // MDBValidation,
+  // MDBSpinner,
   MDBBtn,
-  MDBSpinner,
   MDBInput,
   MDBTextArea,
 } from "mdb-react-ui-kit";
@@ -29,11 +29,10 @@ const AddOrEditTour = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { id } = useParams();
-  const user = useSelector(state=>state.authSlice.user.data)
+  const user = useSelector((state) => state.authSlice.user.data);
 
   const [chips, setChips] = useState([]);
   const [base64Image, setBase64Image] = useState("");
-  // const [loading, setLoading] = useState(false);
 
   const {
     control,
@@ -46,8 +45,8 @@ const AddOrEditTour = () => {
   });
 
   const handleClear = () => {
-    reset({});
-    setChips([]);
+    // reset({});
+    // setChips([]);
   };
 
   const onSubmit = async (data) => {
@@ -56,19 +55,43 @@ const AddOrEditTour = () => {
       desc: data.desc,
       tags: chips,
       image: base64Image.base64,
-      user:user,
-      created_by: user._id
+      user: user,
+      created_by: user._id,
     };
-    const res = await dispatch(tourActions.create(reqData))
-    if(res.payload.success){
-      toast.success(res.payload.message)
-      handleClear()
+
+    let res;
+
+    if (id) {
+      res = await dispatch(tourActions.create(reqData));
+    } else {
+      res = await dispatch(tourActions.create(reqData));
+    }
+
+    if (res.payload.success) {
+      toast.success(res.payload.message);
+      handleClear();
+      // navigate("/")
     }
   };
 
   const onFileUpload = (string) => {
     setBase64Image(string);
   };
+
+  useEffect(() => {
+    const fetchTour = async () => {
+      if (id) {
+        const res = await dispatch(tourActions.fetchTourById(id));
+        if (res.payload.success) {
+          reset({
+            title: res.payload.data.title,
+            desc: res.payload.data.desc,
+          });
+        }
+      }
+    };
+    fetchTour();
+  }, [id, dispatch]);
 
   return (
     <div className={`${styles.AddOrEditTour}`}>
@@ -111,11 +134,7 @@ const AddOrEditTour = () => {
                 )}
               />
               <p className="error-message">
-                {errors.desc ? (
-                  <span>{errors?.desc?.message}</span>
-                ) : (
-                  ""
-                )}
+                {errors.desc ? <span>{errors?.desc?.message}</span> : ""}
               </p>
             </div>
 

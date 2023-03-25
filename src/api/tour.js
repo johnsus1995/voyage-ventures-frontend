@@ -28,8 +28,24 @@ export const fetchTourById = (id, options) => {
 
 export const fetchTourByUserId = (id, options) => {
   return customAxios({
-    url: `/tours/user-tours/${id}`,
+    url: `/tours/user/${id}`,
     method: "GET",
+    ...options,
+  });
+};
+
+export const deleteTour = (id, options) => {
+  return customAxios({
+    url: `/tours/${id}`,
+    method: "DELETE",
+    ...options,
+  });
+};
+
+export const updateTour = (id, options) => {
+  return customAxios({
+    url: `/tours/${id}`,
+    method: "PUT",
     ...options,
   });
 };

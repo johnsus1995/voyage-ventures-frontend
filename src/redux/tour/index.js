@@ -56,6 +56,17 @@ const tourSlice = createSlice({
     [actions.fetchTourByUserId.rejected]: (state, action) => {
       state.loading = false;
     },
+    // DELETE TOUR
+    [actions.deleteTour.pending]: (state, action) => {
+      state.loading = true;
+    },
+    [actions.deleteTour.fulfilled]: (state, action) => {
+      state.loading = false;
+      state.tour = action.payload.data;
+    },
+    [actions.deleteTour.rejected]: (state, action) => {
+      state.loading = false;
+    },
   },
 });
 
