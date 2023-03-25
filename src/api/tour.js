@@ -42,10 +42,13 @@ export const deleteTour = (id, options) => {
   });
 };
 
-export const updateTour = (id, options) => {
+export const updateTour = (config) => {
+  const {data} = config
+  const id = config.options.query.id
   return customAxios({
     url: `/tours/${id}`,
     method: "PUT",
-    ...options,
+    // ...options,
+    data,
   });
 };

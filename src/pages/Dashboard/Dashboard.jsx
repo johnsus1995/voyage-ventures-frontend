@@ -3,7 +3,7 @@ import styles from "./Dashboard.module.scss";
 import { useDispatch, useSelector } from "react-redux";
 import * as tourActions from "redux/tour/actions";
 import { useEffect } from "react";
-import { usersTours } from "redux/tour/selectors";
+import { isLoading, usersTours } from "redux/tour/selectors";
 import { user } from "redux/auth/selectors";
 import {
   MDBCard,
@@ -16,6 +16,7 @@ import {
   MDBBtn,
   MDBIcon,
   MDBCardGroup,
+  MDBSpinner,
 } from "mdb-react-ui-kit";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -24,6 +25,7 @@ const Dashboard = () => {
   const dispatch = useDispatch();
   const _usersTours = useSelector((state) => usersTours(state));
   const _user = useSelector((state) => user(state));
+  const isUsersToursLoading = useSelector((state) => isLoading(state));
 
   const excerpt = (str) => {
     if (str?.length > 40) {
@@ -46,6 +48,11 @@ const Dashboard = () => {
 
   return (
     <div className={`${styles.Dashboard}`}>
+      {isUsersToursLoading && (
+        <MDBSpinner className="me-2" style={{ width: "3rem", height: "3rem" }}>
+          <span className="visually-hidden">Loading...</span>
+        </MDBSpinner>
+      )}
       {_usersTours.length > 0 && (
         <>
           <h5 className="text-center">Dashboard: {_user?.data?.name}</h5>

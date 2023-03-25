@@ -9,6 +9,7 @@ import {
   MDBContainer,
   MDBRow,
   MDBSpinner,
+  MDBTypography,
 } from "mdb-react-ui-kit";
 import TourCard from "components/utils/TourCard";
 
@@ -24,14 +25,16 @@ const Home = () => {
   return (
     <div className={`${styles.Home}`}>
       <MDBRow className="mt-5">
-        {/* <MDBTypography className="text-center mb-0" tag="h2">
-          No tours found
-        </MDBTypography> */}
+        {(!tours.length && !isAllToursLoading) && (
+          <MDBTypography className="text-center mb-0" tag="h2">
+            No tours found!
+          </MDBTypography>
+        )}
         <MDBCol>
           <MDBContainer>
             {!isAllToursLoading ? (
               <MDBRow className="row-cols-1 row-cols-md-3 g-2">
-                {tours.length &&
+                {!!tours.length &&
                   tours?.map((tour, index) => (
                     <TourCard
                       key={index}

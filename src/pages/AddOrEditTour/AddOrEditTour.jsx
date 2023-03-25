@@ -19,6 +19,7 @@ import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import * as tourActions from "redux/tour/actions";
+import { selectedTour } from "redux/tour/selectors";
 
 const tourSchema = yup.object().shape({
   title: yup.string().required("Title is required."),
@@ -30,6 +31,7 @@ const AddOrEditTour = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
   const user = useSelector((state) => state.authSlice.user.data);
+  const tour = useSelector((state) => selectedTour(state));
 
   const [chips, setChips] = useState([]);
   const [base64Image, setBase64Image] = useState("");
@@ -53,16 +55,22 @@ const AddOrEditTour = () => {
     const reqData = {
       title: data.title,
       desc: data.desc,
-      tags: chips,
-      image: base64Image.base64,
+      tags: chips || tour.tags,
+      image: base64Image.base64 || tour?.image,
       user: user,
       created_by: user._id,
     };
 
+    const options = {
+      query:{
+        id:id
+      }
+    }
+
     let res;
 
     if (id) {
-      res = await dispatch(tourActions.create(reqData));
+      res = await dispatch(tourActions.updateTour({data:reqData,options}));
     } else {
       res = await dispatch(tourActions.create(reqData));
     }

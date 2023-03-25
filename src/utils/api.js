@@ -18,11 +18,6 @@ customAxios.interceptors.request.use(
       Authorization: token ? `Bearer ${token}` : "",
       ...config.headers,
     };
-    // console.log(config.headers.Authorization)
-
-    // if (config.query) {
-    //   config.url = generatePath(config.url, config.query);
-    // }
 
     return config;
   },
