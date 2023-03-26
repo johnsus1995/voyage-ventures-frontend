@@ -32,3 +32,7 @@ export const updateTour = createAsyncThunk("tour/updateTour", async (config) => 
   return res.data;
 });
 
+export const searchTours = createAsyncThunk("tour/searchTours", async (config) => {
+  const res = await tourApi.searchTours(config);
+  return res.data;
+});

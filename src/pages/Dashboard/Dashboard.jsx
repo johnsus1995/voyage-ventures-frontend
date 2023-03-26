@@ -1,10 +1,10 @@
 import PropTypes from "prop-types";
 import styles from "./Dashboard.module.scss";
 import { useDispatch, useSelector } from "react-redux";
-import * as tourActions from "redux/tour/actions";
+import * as tourActions from "store/tour/actions";
 import { useEffect } from "react";
-import { isLoading, usersTours } from "redux/tour/selectors";
-import { user } from "redux/auth/selectors";
+import { isLoading, usersTours } from "store/tour/selectors";
+import { user } from "store/auth/selectors";
 import {
   MDBCard,
   MDBCardTitle,

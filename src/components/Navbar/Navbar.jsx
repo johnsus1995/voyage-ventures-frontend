@@ -10,6 +10,7 @@ import {
   MDBNavbarToggler,
   MDBCollapse,
   MDBNavbarBrand,
+  // MDBInput,
   // MDBDropdownItem,
   // MDBDropdownMenu,
   // MDBDropdownToggle,
@@ -17,7 +18,8 @@ import {
 } from "mdb-react-ui-kit";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { logout } from "redux/auth";
+import { logout } from "store/auth";
+import * as tourActions from "store/tour/actions";
 
 const Navbar = (props) => {
   const { className } = props;
@@ -28,12 +30,13 @@ const Navbar = (props) => {
 
   const { user } = useSelector((state) => ({ ...state.authSlice }));
 
-  const handleSubmit = () => {
-    
-  }
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(tourActions.searchTours(search));
+  };
 
-  const handleLogout = () => {
-    dispatch(logout());
+  const handleLogout = async () => {
+    await dispatch(logout());
   };
 
   return (
@@ -89,12 +92,12 @@ const Navbar = (props) => {
                 </MDBNavbarItem>
               )}
             </MDBNavbarNav>
-            <form className="d-flex input-group w-auto" onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} className="d-flex input-group w-auto">
               <input
                 type="text"
                 className="form-control"
                 placeholder="Search tour..."
-                onChange={(e) => setSearch(e)}
+                onChange={(e) => setSearch(e.target.value)}
               />
               <div style={{ marginTop: "5px", marginLeft: "5px" }}>
                 <MDBIcon fas icon="search" />

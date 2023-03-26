@@ -31,8 +31,10 @@ function App() {
         <Routes>
           <Route element={<MainLayout />}>
             <Route path="/" element={<Home />} />
+            <Route path="/tours/search" element={<Home />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
+
             <Route path="" element={<PrivateRoute/>}>
               <Route path="/add-tour" element={<AddOrEditTour />} />
               <Route path="/update/:id" element={<AddOrEditTour />} />

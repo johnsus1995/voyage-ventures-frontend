@@ -18,8 +18,8 @@ import ChipInput from "components/utils/ChipInput";
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import * as tourActions from "redux/tour/actions";
-import { selectedTour } from "redux/tour/selectors";
+import * as tourActions from "store/tour/actions";
+import { selectedTour } from "store/tour/selectors";
 
 const tourSchema = yup.object().shape({
   title: yup.string().required("Title is required."),

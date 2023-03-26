@@ -15,7 +15,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
-import * as authActions from "redux/auth/actions";
+import * as authActions from "store/auth/actions";
 
 const Register = () => {
   const [formValues, setFormValues] = useState({

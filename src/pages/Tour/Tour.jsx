@@ -3,9 +3,9 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import styles from "./Tour.module.scss";
-import * as tourActions from "redux/tour/actions";
-import { selectedTour } from "redux/tour/selectors";
-import { isLoading } from "redux/tour/selectors";
+import * as tourActions from "store/tour/actions";
+import { selectedTour } from "store/tour/selectors";
+import { isLoading } from "store/tour/selectors";
 import moment from "moment";
 import {
   MDBCard,

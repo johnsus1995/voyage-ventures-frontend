@@ -52,3 +52,12 @@ export const updateTour = (config) => {
     data,
   });
 };
+
+export const searchTours = (search_query) => {
+  return customAxios({
+    url: `/tours/search?search_query=${search_query}`,
+    method: "GET",
+    // data,
+    // ...options,
+  });
+};
