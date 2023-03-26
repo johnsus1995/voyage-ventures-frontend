@@ -24,17 +24,21 @@ const Navbar = (props) => {
 
   const dispatch = useDispatch();
   const [show, setShow] = useState(false);
+  const [search, setSearch] = useState("");
 
   const { user } = useSelector((state) => ({ ...state.authSlice }));
 
-  const handleLogout = () => {
-   dispatch(logout()) 
+  const handleSubmit = () => {
+    
   }
+
+  const handleLogout = () => {
+    dispatch(logout());
+  };
 
   return (
     <div className={`${styles.Navbar} ${className}`}>
-
-      <MDBNavbar fixed='top'  expand="lg">
+      <MDBNavbar fixed="top" expand="lg">
         <MDBContainer>
           <MDBNavbarBrand href="/" className="logo">
             World
@@ -72,7 +76,9 @@ const Navbar = (props) => {
               {user?.data?._id ? (
                 <MDBNavbarItem>
                   <MDBNavbarLink href="/">
-                    <p className="nav-link" onClick={handleLogout}>Logout</p>
+                    <p className="nav-link" onClick={handleLogout}>
+                      Logout
+                    </p>
                   </MDBNavbarLink>
                 </MDBNavbarItem>
               ) : (
@@ -83,6 +89,17 @@ const Navbar = (props) => {
                 </MDBNavbarItem>
               )}
             </MDBNavbarNav>
+            <form className="d-flex input-group w-auto" onSubmit={handleSubmit}>
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Search tour..."
+                onChange={(e) => setSearch(e)}
+              />
+              <div style={{ marginTop: "5px", marginLeft: "5px" }}>
+                <MDBIcon fas icon="search" />
+              </div>
+            </form>
           </MDBCollapse>
         </MDBContainer>
       </MDBNavbar>
