@@ -21,14 +21,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { logout } from "store/auth";
 import * as tourActions from "store/tour/actions";
 import { useNavigate } from "react-router-dom";
-import decode from "jwt-decode"
+import decode from "jwt-decode";
 
 const Navbar = (props) => {
   const { className } = props;
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const token = localStorage.getItem("user_token")
+  const token = localStorage.getItem("user_token");
 
   const [show, setShow] = useState(false);
   const [search, setSearch] = useState("");
@@ -46,11 +46,11 @@ const Navbar = (props) => {
   };
 
   useEffect(() => {
-    const decodedToken = decode(token)
-    if(decodedToken.exp *1000 <new Date().getTime()){
-      handleLogout()
+    const decodedToken = decode(token);
+    if (decodedToken.exp * 1000 < new Date().getTime()) {
+      handleLogout();
     }
-  },[token,user])
+  }, [token, user]);
 
   return (
     <div className={`${styles.Navbar} ${className}`}>
@@ -113,7 +113,11 @@ const Navbar = (props) => {
                 onChange={(e) => setSearch(e.target.value)}
               />
               <div
-                style={{ marginTop: "5px", marginLeft: "5px",cursor:"pointer" }}
+                style={{
+                  marginTop: "5px",
+                  marginLeft: "5px",
+                  cursor: "pointer",
+                }}
                 onClick={handleSubmit}
               >
                 <MDBIcon fas icon="search" />

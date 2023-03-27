@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import styles from "./Home.module.scss";
 import * as tourActions from "store/tour/actions";
 import { useDispatch, useSelector } from "react-redux";
@@ -17,15 +17,19 @@ const Home = () => {
   const dispatch = useDispatch();
   const isAllToursLoading = useSelector((state) => isLoading(state));
   const tours = useSelector((state) => allTours(state));
+  const [page, setPage] = useState(2);
 
   useEffect(() => {
-    dispatch(tourActions.fetchAllTours());
+    const options = {
+      query:page
+    }
+    dispatch(tourActions.fetchAllTours({data:{},options}));
   }, []);
 
   return (
     <div className={`${styles.Home}`}>
       <MDBRow className="mt-5">
-        {(!tours?.length && !isAllToursLoading) && (
+        {!tours?.length && !isAllToursLoading && (
           <MDBTypography className="text-center mb-0" tag="h2">
             No tours found!
           </MDBTypography>

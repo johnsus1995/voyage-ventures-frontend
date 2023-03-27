@@ -9,9 +9,11 @@ export const create = (data, options) => {
   });
 };
 
-export const fetchAllTours = (data, options) => {
+export const fetchAllTours = (config) => {
+  const {data, options} = config
+  const page = options.query
   return customAxios({
-    url: "/tours/all-tours",
+    url: `/tours/all-tours?page=${page}`,
     method: "GET",
     data,
     ...options,
