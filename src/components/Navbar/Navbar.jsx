@@ -46,8 +46,9 @@ const Navbar = (props) => {
   };
 
   useEffect(() => {
+    if(!token) return
     const decodedToken = decode(token);
-    if (decodedToken.exp * 1000 < new Date().getTime()) {
+    if (decodedToken?.exp * 1000 < new Date().getTime()) {
       handleLogout();
     }
   }, [token, user]);
