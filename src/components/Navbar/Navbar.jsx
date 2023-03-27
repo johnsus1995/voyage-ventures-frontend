@@ -16,28 +16,41 @@ import {
   // MDBDropdownToggle,
   // MDBDropdown,
 } from "mdb-react-ui-kit";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "store/auth";
 import * as tourActions from "store/tour/actions";
+import { useNavigate } from "react-router-dom";
+import decode from "jwt-decode"
 
 const Navbar = (props) => {
   const { className } = props;
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const token = localStorage.getItem("user_token")
+
   const [show, setShow] = useState(false);
   const [search, setSearch] = useState("");
 
   const { user } = useSelector((state) => ({ ...state.authSlice }));
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    dispatch(tourActions.searchTours(search));
+    navigate(`/tours/search?search_query=${search}`);
+    await dispatch(tourActions.searchTours(search));
   };
 
   const handleLogout = async () => {
     await dispatch(logout());
   };
+
+  useEffect(() => {
+    const decodedToken = decode(token)
+    if(decodedToken.exp *1000 <new Date().getTime()){
+      handleLogout()
+    }
+  },[token,user])
 
   return (
     <div className={`${styles.Navbar} ${className}`}>
@@ -99,7 +112,10 @@ const Navbar = (props) => {
                 placeholder="Search tour..."
                 onChange={(e) => setSearch(e.target.value)}
               />
-              <div style={{ marginTop: "5px", marginLeft: "5px" }}>
+              <div
+                style={{ marginTop: "5px", marginLeft: "5px",cursor:"pointer" }}
+                onClick={handleSubmit}
+              >
                 <MDBIcon fas icon="search" />
               </div>
             </form>

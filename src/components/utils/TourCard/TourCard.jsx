@@ -8,6 +8,7 @@ import {
   MDBCardImage,
 } from "mdb-react-ui-kit";
 import { Link } from "react-router-dom";
+import { excerpt } from "helpers/excerpt";
 
 const TourCard = (props) => {
   const {
@@ -36,8 +37,8 @@ const TourCard = (props) => {
         </span>
         <MDBCardBody>
           <MDBCardTitle className="text-start">{title}</MDBCardTitle>
-          <MDBCardText className="text-start">Description...</MDBCardText>
-          <Link to={`tour/${id}`}>Read more</Link>
+          <MDBCardText className="text-start">{excerpt(desc,20)}
+          <Link to={`tour/${id}`}>{" "}Read more</Link></MDBCardText>
         </MDBCardBody>
       </MDBCard>
     </div>
