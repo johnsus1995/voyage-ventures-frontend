@@ -12,18 +12,23 @@ import {
   MDBTypography,
 } from "mdb-react-ui-kit";
 import TourCard from "components/utils/TourCard";
+import Pagination from "@mui/material/Pagination";
 
 const Home = () => {
   const dispatch = useDispatch();
   const isAllToursLoading = useSelector((state) => isLoading(state));
   const tours = useSelector((state) => allTours(state));
-  const [page, setPage] = useState(2);
+  const [page, setPage] = useState(1);
+
+  const handlePageChange = (event, value) => {
+    setPage(value);
+  };
 
   useEffect(() => {
     const options = {
-      query:page
-    }
-    dispatch(tourActions.fetchAllTours({data:{},options}));
+      query: page,
+    };
+    dispatch(tourActions.fetchAllTours({ data: {}, options }));
   }, []);
 
   return (
@@ -62,6 +67,12 @@ const Home = () => {
           </MDBContainer>
         </MDBCol>
       </MDBRow>
+      <Pagination
+        count={10}
+        page={page}
+        onChange={handlePageChange}
+        style={{padding:"20px 0px"}}
+      />
     </div>
   );
 };
