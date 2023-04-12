@@ -58,7 +58,7 @@ const Navbar = (props) => {
       <MDBNavbar fixed="top" expand="lg">
         <MDBContainer>
           <MDBNavbarBrand href="/" className="logo">
-            World
+            Jaison's App
           </MDBNavbarBrand>
           <MDBNavbarToggler
             type="button"
