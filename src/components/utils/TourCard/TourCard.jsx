@@ -53,6 +53,7 @@ TourCard.defaultProps = {
 TourCard.propTypes = {
   variant: PropTypes.string,
   className: PropTypes.string,
+  title:PropTypes.string
 };
 
 export default TourCard;

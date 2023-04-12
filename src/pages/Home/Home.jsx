@@ -20,6 +20,8 @@ const Home = () => {
   const tours = useSelector((state) => allTours(state));
   const [page, setPage] = useState(1);
 
+  const test = ""
+
   const handlePageChange = (event, value) => {
     setPage(value);
   };
