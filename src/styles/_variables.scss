@@ -1,0 +1,35 @@
+$primary-font: 'Source Sans Pro', sans-serif;
+
+$text-black: #373C43; 
+$text-black2: #2A2E33;
+$light-yellow: #FEF7D9; 
+$white: #fff;
+$white2: #F5F5F5;
+$blue: #248EB4;
+$blue2: #3E98C7;
+$red: #A94442;
+$green: #2B9048;
+$green2: #389D5D;
+$light-red: #ED818E;
+$black: #000;
+$bg-yellow: #F6F4EE;
+$text-grey: #9C9C9C;
+$text-grey2: #8B8B8B;
+$light-grey: #D0D3D4;
+// $dark-grey: #8B8B8B;
+$hover-blue: #197394;
+$dark-black: #2A2E33;
+$hover-white: #F5F5F5;
+$dark-red: #AD1457;
+$light-grey2: #DADCE0;
+$red-orange: #EA4335;
+$yellow: #ffff76;
+$hover-grey: #EEEEEE;
+
+// Viewport widths 
+$xs: "screen and (min-width:" + (320px) + ")";
+$sm: "screen and (min-width:" + (480px) + ")";
+$md: "screen and (min-width:" + (768px) + ")";
+$lg: "screen and (min-width:" + (991px) + ")";
+$xl: "screen and (min-width:" + (1199px) + ")";
+$xxl: "screen and (min-width:" + (1320px) + ")";
