@@ -67,12 +67,12 @@ const Home = () => {
           </MDBContainer>
         </MDBCol>
       </MDBRow>
-      <Pagination
+      {!isAllToursLoading ? <Pagination
         count={10}
         page={page}
         onChange={handlePageChange}
         style={{padding:"20px 0px"}}
-      />
+      />:""}
     </div>
   );
 };
