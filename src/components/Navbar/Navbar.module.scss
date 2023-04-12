@@ -4,12 +4,12 @@
   :global {
     padding-bottom: 50px;
     .logo{
-      color: #606080;
+      color: $navbar-font-color;
       font-weight: 600;
       font-size: 22px;
     }
     .nav-link{
-      color: #606080;
+      color: $navbar-font-color;
       font-weight: 500;
       margin-top: 7px;
       font-size: 17px;
